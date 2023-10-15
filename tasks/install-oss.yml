@@ -1,0 +1,71 @@
+---
+
+- name: Setup-repository RedHat
+  when: ansible_os_family == 'RedHat'
+  block:
+
+    - name: Import RPM signing key
+      ansible.builtin.rpm_key:
+        key: "{{ postgresql_gpg_key }}"
+        state: present
+
+    - name: Disable the built-in PostgreSQL module
+      ansible.builtin.command:
+        cmd: dnf -qy module disable postgresql
+      changed_when: false
+      failed_when: _postgresql.rc > 1
+      register: _postgresql
+      when: ansible_distribution_major_version | int >= 8
+
+    - name: Setup yum/dnf repository
+      ansible.builtin.yum_repository:
+        name: postgresql-{{ postgresql_version }}
+        description: PostgresSQL {{ postgresql_version }}
+        file: postgresql.repo
+        baseurl: "{{ postgresql_repo }}"
+        gpgcheck: yes
+        proxy: "{{ postgresql_proxy | default('') }}"
+      register: _yum_repo
+
+    - name: Update package list (YUM)  # noqa no-handler
+      ansible.builtin.yum:
+        list: updates
+        update_cache: true
+      when: _yum_repo.changed
+
+- name: Setup-repository Debian
+  when: ansible_os_family == 'Debian'
+  block:
+
+    - name: Install GPG
+      ansible.builtin.apt:
+        name: gnupg
+        state: present
+
+    - name: Import APT key from official PostgreSQL repository (Debian)
+      ansible.builtin.apt_key:
+        url: "{{ postgresql_gpg_key }}"
+
+    - name: Add official PostgreSQL repository (Debian)
+      ansible.builtin.apt_repository:
+        repo: deb {{ postgresql_repo }} {{ ansible_distribution_release }}-pgdg main
+        filename: "pgdg.list"
+        state: present
+      register: _apt_repo
+
+    - name: Update package list (APT)  # noqa no-handler
+      ansible.builtin.apt:
+        force_apt_get: yes
+        update_cache: yes
+        cache_valid_time: 0
+      when: _apt_repo.changed
+
+- name: Install postgresql OS packages
+  ansible.builtin.package:
+    name: "{{ postgresql_os_packages }}"
+    state: present
+
+- name: Install postgresql pypi packages
+  ansible.builtin.pip:
+    name: "{{ postgresql_pip_packages }}"
+    state: present

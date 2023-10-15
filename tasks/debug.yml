@@ -1,0 +1,9 @@
+---
+
+- name: Show settings
+  ansible.builtin.debug:
+    msg:
+      postgresql_version: "{{ postgresql_version }}"
+      postgresql_bin_dir: "{{ postgresql_bin_dir }}"
+      postgresql_data_dir: "{{ postgresql_data_dir }}"
+      postgresql_etc_dir: "{{ postgresql_etc_dir }}"

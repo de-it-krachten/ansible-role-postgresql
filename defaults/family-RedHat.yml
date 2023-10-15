@@ -1,0 +1,19 @@
+---
+
+# Repository gpg url
+postgresql_repo: https://download.postgresql.org/pub/repos/yum/{{ postgresql_version }}/redhat/rhel-$releasever-$basearch
+
+# Repository gpg key
+postgresql_gpg_key: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-{{ postgresql_version }}
+
+# List of packages
+postgresql_os_packages:
+  - postgresql{{ postgresql_version }}-server
+
+# Binary/data/etc directory location
+postgresql_bin_dir: /usr/pgsql-{{ postgresql_version }}/bin
+postgresql_data_dir: /var/lib/pgsql/{{ postgresql_version }}/data
+postgresql_etc_dir: /var/lib/pgsql/{{ postgresql_version }}/data
+
+# Service
+postgresql_service: postgresql-{{ postgresql_version }}

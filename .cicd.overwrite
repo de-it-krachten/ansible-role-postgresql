@@ -1,0 +1,66 @@
+---
+
+# Generic
+generic:
+  role: ansible-role-postgresql
+  role_short: postgresql
+  role_description: |
+    PostgreSQL installation
+    https://www.postgresql.org
+  collections: []
+
+# Supported platforms
+platforms:
+  rhel7:
+    ci: false
+    supported: false
+  centos7:
+    ci: false
+    supported: false
+  opensuse15:
+    ci: false
+    supported: false
+  sles15:
+    ci: false
+    supported: false
+  fedora37:
+    ci: false
+    supported: false
+  fedora38:
+    ci: false
+    supported: false
+
+# Molecule
+molecule:
+  requirements:
+    roles_extra: []
+  converge:
+    vars:
+      postgresql_db_name: test
+      postgresql_db_user: test
+      postgresql_db_password: test
+  nodes:
+    - name: pg11
+    - name: pg12
+    - name: pg13
+    - name: pg14
+    - name: pg15
+    - name: pg16
+  host_vars:
+    postgresql-{{ platform.name }}-pg11:
+      postgresql_version: 11
+    postgresql-{{ platform.name }}-pg12:
+      postgresql_version: 12
+    postgresql-{{ platform.name }}-pg13:
+      postgresql_version: 13
+    postgresql-{{ platform.name }}-pg14:
+      postgresql_version: 14
+    postgresql-{{ platform.name }}-pg15:
+      postgresql_version: 15
+    postgresql-{{ platform.name }}-pg16:
+      postgresql_version: 16
+
+# CI templates
+ci_templates:
+  converge.yml:
+    force: false

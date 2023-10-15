@@ -1,0 +1,22 @@
+---
+
+- name: Retrieve OS specific variables
+  ansible.builtin.include_tasks: vars.yml
+
+- name: Show settings
+  ansible.builtin.include_tasks: debug.yml
+
+- name: Install postgresql (OSS)
+  ansible.builtin.include_tasks: install-oss.yml
+  when: postgresql_type == 'oss'
+
+- name: Install postgresql (vendor)
+  ansible.builtin.include_tasks: install-vendor.yml
+  when: postgresql_type == 'vendor'
+
+- name: Configure postgresql
+  ansible.builtin.include_tasks: config.yml
+
+- name: Setup database
+  ansible.builtin.include_tasks: database.yml
+  when: postgresql_db_name is defined

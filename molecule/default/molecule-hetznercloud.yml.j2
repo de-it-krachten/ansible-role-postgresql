@@ -1,0 +1,75 @@
+---
+
+dependency:
+  name: galaxy
+driver:
+  name: hetznercloud
+lint: |
+  set -e
+  yamllint .
+  ln -fs molecule/default/requirements.yml
+  ansible-lint
+  rm -f requirements.yml
+platforms:
+{% for platform in MOLECULE_DISTROS %}
+  - name: postgresql-{{ platform.name }}-pg11
+    server_type: "{{ platform.server_type | default('cx11') }}"
+    image: "{{ platform.image }}"
+    location: "{{ platform.location | default('hel1') }}"
+  - name: postgresql-{{ platform.name }}-pg12
+    server_type: "{{ platform.server_type | default('cx11') }}"
+    image: "{{ platform.image }}"
+    location: "{{ platform.location | default('hel1') }}"
+  - name: postgresql-{{ platform.name }}-pg13
+    server_type: "{{ platform.server_type | default('cx11') }}"
+    image: "{{ platform.image }}"
+    location: "{{ platform.location | default('hel1') }}"
+  - name: postgresql-{{ platform.name }}-pg14
+    server_type: "{{ platform.server_type | default('cx11') }}"
+    image: "{{ platform.image }}"
+    location: "{{ platform.location | default('hel1') }}"
+  - name: postgresql-{{ platform.name }}-pg15
+    server_type: "{{ platform.server_type | default('cx11') }}"
+    image: "{{ platform.image }}"
+    location: "{{ platform.location | default('hel1') }}"
+  - name: postgresql-{{ platform.name }}-pg16
+    server_type: "{{ platform.server_type | default('cx11') }}"
+    image: "{{ platform.image }}"
+    location: "{{ platform.location | default('hel1') }}"
+{% endfor %}
+provisioner:
+  name: ansible
+{% if MOLECULE_ANSIBLE_ARGS is defined %}
+  ansible_args:
+{% for molecule_ansible_arg in MOLECULE_ANSIBLE_ARGS %}
+    - {{ molecule_ansible_arg }}
+{% endfor %}
+{% endif %}
+  env:
+    ANSIBLE_PIPELINING: "True"
+  lint:
+    name: ansible-lint
+  playbooks:
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}
+  inventory:
+    group_vars: {}
+    host_vars:
+{% for platform in MOLECULE_DISTROS %}
+      postgresql-{{ platform.name }}-pg11:
+        postgresql_version: 11
+      postgresql-{{ platform.name }}-pg12:
+        postgresql_version: 12
+      postgresql-{{ platform.name }}-pg13:
+        postgresql_version: 13
+      postgresql-{{ platform.name }}-pg14:
+        postgresql_version: 14
+      postgresql-{{ platform.name }}-pg15:
+        postgresql_version: 15
+      postgresql-{{ platform.name }}-pg16:
+        postgresql_version: 16
+
+{% endfor %}
+scenario:
+  name: default
+verifier:
+  name: ansible
