@@ -1,0 +1,9 @@
+# PostgreSQL Client Authentication Configuration File
+# ===================================================
+#
+# For more information, see : https://www.postgresql.org/docs/current/auth-pg-hba-conf.html
+#
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+{% for item in postgresql_hba_entries %}
+{{ item.type }} {{ item.db }} {{ item.user }} {{ item.address }} {{ item.method }}
+{% endfor %}

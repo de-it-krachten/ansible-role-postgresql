@@ -1,0 +1,24 @@
+---
+
+- name: Show database settings
+  ansible.builtin.debug:
+    msg:
+      postgresql_db_name: "{{ postgresql_db_name }}"
+      postgresql_db_user: "{{ postgresql_db_user }}"
+      postgresql_db_password: "{{ postgresql_db_password }}"
+
+- name: Create database '{{ postgresql_db_name }}'
+  community.postgresql.postgresql_db:
+    name: "{{ postgresql_db_name }}"
+    state: present
+  become: yes
+  become_user: "{{ postgresql_user }}"
+
+- name: Create database user '{{ postgresql_db_user }}'
+  community.postgresql.postgresql_user:
+    name: "{{ postgresql_db_user }}"
+    state: present
+    password: "{{ postgresql_db_password }}"
+    db: "{{ postgresql_db_name }}"
+  become: yes
+  become_user: "{{ postgresql_user }}"

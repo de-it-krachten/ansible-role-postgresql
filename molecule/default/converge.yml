@@ -1,0 +1,14 @@
+---
+
+- name: Converge
+  hosts: all
+  become: "yes"
+  vars:
+    postgresql_db_name: test
+    postgresql_db_user: test
+    postgresql_db_password: test
+  tasks:
+
+    - name: Include role 'ansible-role-postgresql'
+      ansible.builtin.include_role:
+        name: ansible-role-postgresql
