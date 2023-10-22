@@ -32,6 +32,10 @@ platforms:
 
 # Molecule
 molecule:
+  prepare:
+    vars:
+      activate_epel: true
+      install_python: true
   requirements:
     roles_extra: []
   converge:
@@ -64,3 +68,8 @@ molecule:
 ci_templates:
   converge.yml:
     force: false
+
+# Dependencies
+dependencies:
+  roles:
+    - deitkrachten.python

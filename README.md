@@ -11,7 +11,7 @@ https://www.postgresql.org
 ## Dependencies
 
 #### Roles
-None
+- deitkrachten.python
 
 #### Collections
 - community.general
@@ -49,6 +49,9 @@ postgresql_version: 13
 # List of packages
 postgresql_os_packages:
   - postgresql-server
+
+# Should optional packages (devel) be installed
+postgresql_install_optional_packages: false
 
 # List of packages
 postgresql_pip_packages:
@@ -99,6 +102,10 @@ postgresql_gpg_key: https://www.postgresql.org/media/keys/ACCC4CF8.asc
 postgresql_os_packages:
   - postgresql-{{ postgresql_version }}
 
+# List of optional packages
+postgresql_os_packages_optional:
+  - libpq-dev
+
 # binary/data/etc directory
 postgresql_bin_dir: /usr/lib/postgresql/{{ postgresql_version }}/bin
 postgresql_data_dir: /var/lib/postgresql/{{ postgresql_version }}/main
@@ -113,9 +120,16 @@ postgresql_repo: https://download.postgresql.org/pub/repos/yum/{{ postgresql_ver
 # Repository gpg key
 postgresql_gpg_key: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-{{ postgresql_version }}
 
-# List of packages
+# List of required packages
 postgresql_os_packages:
   - postgresql{{ postgresql_version }}-server
+
+# List of optinal packages
+postgresql_os_packages_optional:
+  - postgresql{{ postgresql_version }}-devel
+
+# Install optional packages
+postgresql_install_optional_packages: true
 
 # Binary/data/etc directory location
 postgresql_bin_dir: /usr/pgsql-{{ postgresql_version }}/bin
@@ -124,6 +138,14 @@ postgresql_etc_dir: /var/lib/pgsql/{{ postgresql_version }}/data
 
 # Service
 postgresql_service: postgresql-{{ postgresql_version }}
+</pre></code>
+
+### defaults/family-RedHat-8.yml
+<pre><code>
+# List of optional packages
+postgresql_os_packages_optional:
+  - postgresql{{ postgresql_version }}-devel
+  - python3-wheel
 </pre></code>
 
 
