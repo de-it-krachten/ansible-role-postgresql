@@ -1,0 +1,6 @@
+---
+
+# List of optional packages
+postgresql_os_packages_optional:
+  - postgresql{{ postgresql_version }}-devel
+  - python3-wheel

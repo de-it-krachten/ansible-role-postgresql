@@ -44,6 +44,8 @@
       - opensuse15
 
     systemctl_alternative: False
+    activate_epel: True
+    install_python: True
   roles:
     - deitkrachten.facts
     - deitkrachten.showinfo
