@@ -6,6 +6,9 @@ postgresql_type: oss
 # Postgresql version
 postgresql_version: 13
 
+# Defines proxy to use
+# postgresql_proxy: http://127.0.0.1:3128
+
 # List of packages
 postgresql_os_packages:
   - postgresql-server

@@ -8,6 +8,9 @@
       ansible.builtin.rpm_key:
         key: "{{ postgresql_gpg_key }}"
         state: present
+      environment:
+        HTTPS_PROXY: "{{ postgresql_proxy | default('') }}"
+        HTTP_PROXY: "{{ postgresql_proxy | default('') }}"
 
     - name: Disable the built-in PostgreSQL module
       ansible.builtin.command:
