@@ -3,7 +3,7 @@
 
 # ansible-role-postgresql
 
-PostgreSQL installation
+PostgreSQL installation (v12+)
 https://www.postgresql.org
 
 

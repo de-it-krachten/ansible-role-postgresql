@@ -12,44 +12,6 @@ lint: |
   rm -f requirements.yml
 platforms:
 {% for platform in MOLECULE_DISTROS %}
-  - name: postgresql-{{ platform.name }}-pg11
-    image: "{{ platform.image }}"
-{% if platform.kernel_memory is defined %}
-    kernel_memory: {{ platform.kernel_memory }}
-{% endif %}
-{% if platform.memory is defined %}
-    memory: {{ platform.memory }}
-{% endif %}
-    rhsm: {{ platform.rhsm | default(False) }}
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
-{% if platform.environment is defined %}
-    environment:
-{% for key, value in platform.environment.items() %}
-      {{ key }}: "{{ value }}"
-{% endfor %}
-{% endif %}
-    volumes:
-{% for volume in platform.volumes %}
-      - {{ volume }}
-{% endfor %}
-{% if platform.networks is defined %}
-    networks:
-{% for network in platform.networks %}
-      - name: postgresql-{{ network }}
-{% endfor %}
-{% endif %}
-{% if platform.ports is defined %}
-    published_ports:
-{% for port in platform.ports %}
-      - {{ port }}
-{% endfor %}
-{% endif %}
-{% if platform.cgroupns_mode is defined %}
-    cgroupns_mode: {{ platform.cgroupns_mode }}
-{% endif %}
-    privileged: {{ platform.privileged | default(True) }}
-    pre_build_image: {{ platform.pre_build_image | default(True) }}
-    dockerfile: Dockerfile.{{ platform.name }}.j2
   - name: postgresql-{{ platform.name }}-pg12
     image: "{{ platform.image }}"
 {% if platform.kernel_memory is defined %}
@@ -260,8 +222,6 @@ provisioner:
     group_vars: {"linux": {"ansible_user": "vagrant", "ansible_password": "vagrant"}, "windows": {"ansible_user": "vagrant", "ansible_password": "vagrant", "ansible_become_user": "vagrant", "ansible_become_method": "runas", "ansible_connection": "ssh", "ansible_shell_type": "cmd"}}
     host_vars:
 {% for platform in MOLECULE_DISTROS %}
-      postgresql-{{ platform.name }}-pg11:
-        postgresql_version: 11
       postgresql-{{ platform.name }}-pg12:
         postgresql_version: 12
       postgresql-{{ platform.name }}-pg13:
