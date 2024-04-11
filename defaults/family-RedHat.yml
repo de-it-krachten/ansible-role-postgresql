@@ -4,7 +4,8 @@
 postgresql_repo: https://download.postgresql.org/pub/repos/yum/{{ postgresql_version }}/redhat/rhel-$releasever-$basearch
 
 # Repository gpg key
-postgresql_gpg_key: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-{{ postgresql_version }}
+postgresql_gpg_key: >-
+  https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL
 
 # List of required packages
 postgresql_os_packages:

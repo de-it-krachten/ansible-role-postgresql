@@ -3,7 +3,7 @@
 
 # ansible-role-postgresql
 
-PostgreSQL installation
+PostgreSQL installation (v12+)
 https://www.postgresql.org
 
 
@@ -14,7 +14,6 @@ https://www.postgresql.org
 - deitkrachten.python
 
 #### Collections
-- community.general
 - community.postgresql
 
 ## Platforms
@@ -93,6 +92,43 @@ postgresql_hba_entries:
   - { type: host, db: all, user: all, address: '127.0.0.1/32', method: '{{ postgresql_password_encryption_scheme }}' }
 </pre></code>
 
+### defaults/family-RedHat-8.yml
+<pre><code>
+# List of optional packages
+postgresql_os_packages_optional:
+  - postgresql{{ postgresql_version }}-devel
+  - python3-wheel
+</pre></code>
+
+### defaults/family-RedHat.yml
+<pre><code>
+# Repository gpg url
+postgresql_repo: https://download.postgresql.org/pub/repos/yum/{{ postgresql_version }}/redhat/rhel-$releasever-$basearch
+
+# Repository gpg key
+postgresql_gpg_key: >-
+  https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL
+
+# List of required packages
+postgresql_os_packages:
+  - postgresql{{ postgresql_version }}-server
+
+# List of optinal packages
+postgresql_os_packages_optional:
+  - postgresql{{ postgresql_version }}-devel
+
+# Install optional packages
+postgresql_install_optional_packages: true
+
+# Binary/data/etc directory location
+postgresql_bin_dir: /usr/pgsql-{{ postgresql_version }}/bin
+postgresql_data_dir: /var/lib/pgsql/{{ postgresql_version }}/data
+postgresql_etc_dir: /var/lib/pgsql/{{ postgresql_version }}/data
+
+# Service
+postgresql_service: postgresql-{{ postgresql_version }}
+</pre></code>
+
 ### defaults/family-Debian.yml
 <pre><code>
 # OSS repository url
@@ -115,42 +151,6 @@ postgresql_data_dir: /var/lib/postgresql/{{ postgresql_version }}/main
 postgresql_etc_dir: /etc/postgresql/{{ postgresql_version }}/main
 </pre></code>
 
-### defaults/family-RedHat.yml
-<pre><code>
-# Repository gpg url
-postgresql_repo: https://download.postgresql.org/pub/repos/yum/{{ postgresql_version }}/redhat/rhel-$releasever-$basearch
-
-# Repository gpg key
-postgresql_gpg_key: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG-{{ postgresql_version }}
-
-# List of required packages
-postgresql_os_packages:
-  - postgresql{{ postgresql_version }}-server
-
-# List of optinal packages
-postgresql_os_packages_optional:
-  - postgresql{{ postgresql_version }}-devel
-
-# Install optional packages
-postgresql_install_optional_packages: true
-
-# Binary/data/etc directory location
-postgresql_bin_dir: /usr/pgsql-{{ postgresql_version }}/bin
-postgresql_data_dir: /var/lib/pgsql/{{ postgresql_version }}/data
-postgresql_etc_dir: /var/lib/pgsql/{{ postgresql_version }}/data
-
-# Service
-postgresql_service: postgresql-{{ postgresql_version }}
-</pre></code>
-
-### defaults/family-RedHat-8.yml
-<pre><code>
-# List of optional packages
-postgresql_os_packages_optional:
-  - postgresql{{ postgresql_version }}-devel
-  - python3-wheel
-</pre></code>
-
 
 
 
@@ -159,13 +159,12 @@ postgresql_os_packages_optional:
 <pre><code>
 - name: sample playbook for role 'postgresql'
   hosts: all
-  become: "yes"
+  become: 'yes'
   vars:
     postgresql_db_name: test
     postgresql_db_user: test
     postgresql_db_password: test
   tasks:
-
     - name: Include role 'postgresql'
       ansible.builtin.include_role:
         name: postgresql

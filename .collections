@@ -1,4 +1,3 @@
 ---
 collections:
-  - community.general
-  - community.postgresql
+  - name: community.postgresql
