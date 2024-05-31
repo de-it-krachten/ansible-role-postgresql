@@ -32,6 +32,7 @@ Supported platforms
 - Debian 12 (Bookworm)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
+- Ubuntu 24.04 LTS
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -92,6 +93,28 @@ postgresql_hba_entries:
   - { type: host, db: all, user: all, address: '127.0.0.1/32', method: '{{ postgresql_password_encryption_scheme }}' }
 </pre></code>
 
+### defaults/family-Debian.yml
+<pre><code>
+# OSS repository url
+postgresql_repo: https://apt.postgresql.org/pub/repos/apt
+
+# OSS APT GPG key
+postgresql_gpg_key: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+
+# List of packages
+postgresql_os_packages:
+  - postgresql-{{ postgresql_version }}
+
+# List of optional packages
+postgresql_os_packages_optional:
+  - libpq-dev
+
+# binary/data/etc directory
+postgresql_bin_dir: /usr/lib/postgresql/{{ postgresql_version }}/bin
+postgresql_data_dir: /var/lib/postgresql/{{ postgresql_version }}/main
+postgresql_etc_dir: /etc/postgresql/{{ postgresql_version }}/main
+</pre></code>
+
 ### defaults/family-RedHat-8.yml
 <pre><code>
 # List of optional packages
@@ -127,28 +150,6 @@ postgresql_etc_dir: /var/lib/pgsql/{{ postgresql_version }}/data
 
 # Service
 postgresql_service: postgresql-{{ postgresql_version }}
-</pre></code>
-
-### defaults/family-Debian.yml
-<pre><code>
-# OSS repository url
-postgresql_repo: https://apt.postgresql.org/pub/repos/apt
-
-# OSS APT GPG key
-postgresql_gpg_key: https://www.postgresql.org/media/keys/ACCC4CF8.asc
-
-# List of packages
-postgresql_os_packages:
-  - postgresql-{{ postgresql_version }}
-
-# List of optional packages
-postgresql_os_packages_optional:
-  - libpq-dev
-
-# binary/data/etc directory
-postgresql_bin_dir: /usr/lib/postgresql/{{ postgresql_version }}/bin
-postgresql_data_dir: /var/lib/postgresql/{{ postgresql_version }}/main
-postgresql_etc_dir: /etc/postgresql/{{ postgresql_version }}/main
 </pre></code>
 
 
