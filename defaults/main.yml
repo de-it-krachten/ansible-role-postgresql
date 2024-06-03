@@ -1,5 +1,8 @@
 ---
 
+# Type of installation (client or server)
+postgresql_install_type: server
+
 # Installation source to use (vendor or oss)
 postgresql_type: oss
 
