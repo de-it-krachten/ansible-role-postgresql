@@ -1,3 +1,11 @@
+# [1.2.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.1.0...v1.2.0) (2024-06-03)
+
+
+### Features
+
+* Add support for Ubuntu 24.04 LTS + Fedora 40 ([a8d8d05](https://github.com/de-it-krachten/ansible-role-postgresql/commit/a8d8d053d574a596047e2926b54483b5259e1871))
+* Support client only installation ([239ce40](https://github.com/de-it-krachten/ansible-role-postgresql/commit/239ce40ed63cfd6c809925cd60f1aa7e9c470676))
+
 # [1.1.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.0.1...v1.1.0) (2024-04-11)
 
 
