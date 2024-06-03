@@ -16,7 +16,10 @@
 
 - name: Configure postgresql
   ansible.builtin.include_tasks: config.yml
+  when: postgresql_install_type == 'server'
 
 - name: Setup database
   ansible.builtin.include_tasks: database.yml
-  when: postgresql_db_name is defined
+  when:
+    - postgresql_install_type == 'server'
+    - postgresql_db_name is defined
