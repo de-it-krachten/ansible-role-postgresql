@@ -2,9 +2,14 @@
 
 - name: Get packages
   ansible.builtin.set_fact:
-    postgresql_packages: "postgresql_server_packages if postgresql_install_type == 'server' else postgresql_client_packages }}"
+    postgresql_packages: >-
+      {%- if postgresql_install_type == 'server' -%}
+      {{ postgresql_server_packages }}
+      {%- else -%}
+      {{ postgresql_client_packages }}
+      {%- endif -%}
 
-- name: SHow packages
+- name: Show packages
   ansible.builtin.debug:
     msg:
       postgresql_packages: "{{ postgresql_packages }}"
