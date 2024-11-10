@@ -168,7 +168,14 @@ postgresql_service: postgresql-{{ postgresql_version }}
     postgresql_db_user: test
     postgresql_db_password: test
   tasks:
-    - name: Include role 'postgresql'
+    - name: Install postgresql client
       ansible.builtin.include_role:
         name: postgresql
+      vars:
+        postgresql_install_type: client
+    - name: Install postgresql server
+      ansible.builtin.include_role:
+        name: postgresql
+      vars:
+        postgresql_install_type: server
 </pre></code>

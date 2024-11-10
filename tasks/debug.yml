@@ -5,7 +5,7 @@
     msg:
       postgresql_version: "{{ postgresql_version }}"
       postgresql_install_type: "{{ postgresql_install_type }}"
-      postgresql_packages: "{{ vars['postgresql_'+postgresql_install_type+'_packages'] }}"
+      postgresql_packages: "{{ vars['postgresql_' + postgresql_install_type + '_packages'] }}"
       postgresql_bin_dir: "{{ postgresql_bin_dir }}"
       postgresql_data_dir: "{{ postgresql_data_dir if postgresql_install_type == 'server' else 'N/A' }}"
       postgresql_etc_dir: "{{ postgresql_etc_dir }}"

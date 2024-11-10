@@ -12,35 +12,19 @@ lint: |
   rm -f requirements.yml
 platforms:
 {% for platform in MOLECULE_DISTROS %}
-  - name: postgresql-{{ platform.name }}-pg13-client
+  - name: postgresql-{{ platform.name }}-pg13
     server_type: "{{ platform.server_type | default('cx11') }}"
     image: "{{ platform.image }}"
     location: "{{ platform.location | default('hel1') }}"
-  - name: postgresql-{{ platform.name }}-pg13-server
+  - name: postgresql-{{ platform.name }}-pg14
     server_type: "{{ platform.server_type | default('cx11') }}"
     image: "{{ platform.image }}"
     location: "{{ platform.location | default('hel1') }}"
-  - name: postgresql-{{ platform.name }}-pg14-client
+  - name: postgresql-{{ platform.name }}-pg15
     server_type: "{{ platform.server_type | default('cx11') }}"
     image: "{{ platform.image }}"
     location: "{{ platform.location | default('hel1') }}"
-  - name: postgresql-{{ platform.name }}-pg14-server
-    server_type: "{{ platform.server_type | default('cx11') }}"
-    image: "{{ platform.image }}"
-    location: "{{ platform.location | default('hel1') }}"
-  - name: postgresql-{{ platform.name }}-pg15-client
-    server_type: "{{ platform.server_type | default('cx11') }}"
-    image: "{{ platform.image }}"
-    location: "{{ platform.location | default('hel1') }}"
-  - name: postgresql-{{ platform.name }}-pg15-server
-    server_type: "{{ platform.server_type | default('cx11') }}"
-    image: "{{ platform.image }}"
-    location: "{{ platform.location | default('hel1') }}"
-  - name: postgresql-{{ platform.name }}-pg16-client
-    server_type: "{{ platform.server_type | default('cx11') }}"
-    image: "{{ platform.image }}"
-    location: "{{ platform.location | default('hel1') }}"
-  - name: postgresql-{{ platform.name }}-pg16-server
+  - name: postgresql-{{ platform.name }}-pg16
     server_type: "{{ platform.server_type | default('cx11') }}"
     image: "{{ platform.image }}"
     location: "{{ platform.location | default('hel1') }}"
@@ -64,29 +48,13 @@ provisioner:
     group_vars: {"linux": {"ansible_user": "vagrant", "ansible_password": "vagrant"}, "windows": {"ansible_user": "vagrant", "ansible_password": "vagrant", "ansible_become_user": "vagrant", "ansible_become_method": "runas", "ansible_connection": "ssh", "ansible_shell_type": "cmd"}}
     host_vars:
 {% for platform in MOLECULE_DISTROS %}
-      postgresql-{{ platform.name }}-pg13-client:
-        postgresql_install_type: client
+      postgresql-{{ platform.name }}-pg13:
         postgresql_version: 13
-      postgresql-{{ platform.name }}-pg13-server:
-        postgresql_install_type: server
-        postgresql_version: 13
-      postgresql-{{ platform.name }}-pg14-client:
-        postgresql_install_type: client
+      postgresql-{{ platform.name }}-pg14:
         postgresql_version: 14
-      postgresql-{{ platform.name }}-pg14-server:
-        postgresql_install_type: server
-        postgresql_version: 14
-      postgresql-{{ platform.name }}-pg15-client:
-        postgresql_install_type: client
+      postgresql-{{ platform.name }}-pg15:
         postgresql_version: 15
-      postgresql-{{ platform.name }}-pg15-server:
-        postgresql_install_type: server
-        postgresql_version: 15
-      postgresql-{{ platform.name }}-pg16-client:
-        postgresql_install_type: client
-        postgresql_version: 16
-      postgresql-{{ platform.name }}-pg16-server:
-        postgresql_install_type: server
+      postgresql-{{ platform.name }}-pg16:
         postgresql_version: 16
 
 {% endfor %}

@@ -9,6 +9,14 @@
     postgresql_db_password: test
   tasks:
 
-    - name: Include role 'ansible-role-postgresql'
+    - name: Install postgresql client
       ansible.builtin.include_role:
         name: ansible-role-postgresql
+      vars:
+        postgresql_install_type: client
+
+    - name: Install postgresql server
+      ansible.builtin.include_role:
+        name: ansible-role-postgresql
+      vars:
+        postgresql_install_type: server
