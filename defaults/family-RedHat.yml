@@ -8,11 +8,11 @@ postgresql_gpg_key: >-
   https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL
 
 # List of required packages
-postgresql_os_packages:
+postgresql_server_packages:
   - postgresql{{ postgresql_version }}-server
-
-# List of optinal packages
-postgresql_os_packages_optional:
+postgresql_client_packages:
+  - postgresql{{ postgresql_version }}
+postgresql_optional_packages:
   - postgresql{{ postgresql_version }}-devel
 
 # Install optional packages

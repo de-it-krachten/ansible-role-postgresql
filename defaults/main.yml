@@ -12,9 +12,8 @@ postgresql_version: 13
 # Defines proxy to use
 # postgresql_proxy: http://127.0.0.1:3128
 
-# List of packages
-postgresql_os_packages:
-  - postgresql-server
+# List of server packages
+postgresql_optional_packages: []
 
 # Should optional packages (devel) be installed
 postgresql_install_optional_packages: false

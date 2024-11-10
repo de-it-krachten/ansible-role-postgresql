@@ -40,6 +40,9 @@ Note:
 ## Role Variables
 ### defaults/main.yml
 <pre><code>
+# Type of installation (client or server)
+postgresql_install_type: server
+
 # Installation source to use (vendor or oss)
 postgresql_type: oss
 
@@ -49,9 +52,8 @@ postgresql_version: 13
 # Defines proxy to use
 # postgresql_proxy: http://127.0.0.1:3128
 
-# List of packages
-postgresql_os_packages:
-  - postgresql-server
+# List of server packages
+postgresql_optional_packages: []
 
 # Should optional packages (devel) be installed
 postgresql_install_optional_packages: false
@@ -101,12 +103,12 @@ postgresql_repo: https://apt.postgresql.org/pub/repos/apt
 # OSS APT GPG key
 postgresql_gpg_key: https://www.postgresql.org/media/keys/ACCC4CF8.asc
 
-# List of packages
-postgresql_os_packages:
+# Lists of packages
+postgresql_server_packages:
   - postgresql-{{ postgresql_version }}
-
-# List of optional packages
-postgresql_os_packages_optional:
+postgresql_client_packages:
+  - postgresql-client-{{ postgresql_version }}
+postgresql_optional_packages:
   - libpq-dev
 
 # binary/data/etc directory
@@ -118,7 +120,7 @@ postgresql_etc_dir: /etc/postgresql/{{ postgresql_version }}/main
 ### defaults/family-RedHat-8.yml
 <pre><code>
 # List of optional packages
-postgresql_os_packages_optional:
+postgresql_optional_packages:
   - postgresql{{ postgresql_version }}-devel
   - python3-wheel
 </pre></code>
@@ -133,11 +135,11 @@ postgresql_gpg_key: >-
   https://download.postgresql.org/pub/repos/yum/keys/PGDG-RPM-GPG-KEY-RHEL
 
 # List of required packages
-postgresql_os_packages:
+postgresql_server_packages:
   - postgresql{{ postgresql_version }}-server
-
-# List of optinal packages
-postgresql_os_packages_optional:
+postgresql_client_packages:
+  - postgresql{{ postgresql_version }}
+postgresql_optional_packages:
   - postgresql{{ postgresql_version }}-devel
 
 # Install optional packages

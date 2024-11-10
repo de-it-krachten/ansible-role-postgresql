@@ -44,22 +44,39 @@ molecule:
       postgresql_db_user: test
       postgresql_db_password: test
   nodes:
-    - name: pg12
-    - name: pg13
-    - name: pg14
-    - name: pg15
-    - name: pg16
+    - name: pg13-client
+    - name: pg13-server
+    - name: pg14-client
+    - name: pg14-server
+    - name: pg15-client
+    - name: pg15-server
+    - name: pg16-client
+    - name: pg16-server
   host_vars:
-    postgresql-{{ platform.name }}-pg12:
-      postgresql_version: 12
-    postgresql-{{ platform.name }}-pg13:
+    postgresql-{{ platform.name }}-pg13-server:
       postgresql_version: 13
-    postgresql-{{ platform.name }}-pg14:
+      postgresql_install_type: server
+    postgresql-{{ platform.name }}-pg13-client:
+      postgresql_version: 13
+      postgresql_install_type: client
+    postgresql-{{ platform.name }}-pg14-server:
       postgresql_version: 14
-    postgresql-{{ platform.name }}-pg15:
+      postgresql_install_type: server
+    postgresql-{{ platform.name }}-pg14-client:
+      postgresql_version: 14
+      postgresql_install_type: client
+    postgresql-{{ platform.name }}-pg15-server:
       postgresql_version: 15
-    postgresql-{{ platform.name }}-pg16:
+      postgresql_install_type: server
+    postgresql-{{ platform.name }}-pg15-client:
+      postgresql_version: 15
+      postgresql_install_type: client
+    postgresql-{{ platform.name }}-pg16-server:
       postgresql_version: 16
+      postgresql_install_type: server
+    postgresql-{{ platform.name }}-pg16-client:
+      postgresql_version: 16
+      postgresql_install_type: client
 
 # CI templates
 ci_templates:

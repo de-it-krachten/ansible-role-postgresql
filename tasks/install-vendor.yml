@@ -26,7 +26,7 @@
 
 - name: Install postgresql OS packages
   ansible.builtin.package:
-    name: "{{ postgresql_os_packages }}"
+    name: "{{ postgresql_packages }}"
     state: present
 
 - name: Install postgresql pypi packages
