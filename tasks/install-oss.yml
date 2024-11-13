@@ -30,15 +30,15 @@
         enabled: no
         proxy: "{{ postgresql_proxy | default('') }}"
 
-    - name: Install postgresql required OS packages
+    - name: Install postgresql required packages
       ansible.builtin.yum:
-        name: "{{ postgresql_os_packages }}"
+        name: "{{ vars['postgresql_' + postgresql_install_type + '_packages'] }}"
         state: "{{ postgresql_package_state | default('present') }}"
         enablerepo: "postgresql-{{ postgresql_version }}"
 
-    - name: Install postgresql optional OS packages
+    - name: Install postgresql optional packages
       ansible.builtin.yum:
-        name: "{{ postgresql_os_packages_optional }}"
+        name: "{{ postgresql_optional_packages }}"
         state: "{{ postgresql_package_state | default('present') }}"
         enablerepo: "postgresql-{{ postgresql_version }}"
       when: postgresql_install_optional_packages | bool
@@ -73,12 +73,12 @@
 
     - name: Install postgresql required OS packages
       ansible.builtin.apt:
-        name: "{{ postgresql_os_packages }}"
+        name: "{{ vars['postgresql_' + postgresql_install_type + '_packages'] }}"
         state: "{{ postgresql_package_state | default('present') }}"
 
     - name: Install postgresql optional OS packages
       ansible.builtin.apt:
-        name: "{{ postgresql_os_packages_optional }}"
+        name: "{{ postgresql_optional_packages }}"
         state: "{{ postgresql_package_state | default('present') }}"
       when: postgresql_install_optional_packages | bool
 
