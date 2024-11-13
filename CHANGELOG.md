@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.2.0...v1.3.0) (2024-11-13)
+
+
+### Features
+
+* Support both server & client installation ([91617ee](https://github.com/de-it-krachten/ansible-role-postgresql/commit/91617eefe1c59d7da87a483feda1be659e7e3cb7))
+
 # [1.2.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.1.0...v1.2.0) (2024-06-03)
 
 
