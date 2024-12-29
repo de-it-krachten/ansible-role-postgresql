@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.3.0...v1.4.0) (2024-12-29)
+
+
+### Features
+
+* Update supported platforms & CI ([544ac8e](https://github.com/de-it-krachten/ansible-role-postgresql/commit/544ac8e149e6c990a923f91e015f9657f6d2b94e))
+
 # [1.3.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.2.0...v1.3.0) (2024-11-13)
 
 
