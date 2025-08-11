@@ -31,13 +31,13 @@
         proxy: "{{ postgresql_proxy | default('') }}"
 
     - name: Install postgresql required packages
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: "{{ vars['postgresql_' + postgresql_install_type + '_packages'] }}"
         state: "{{ postgresql_package_state | default('present') }}"
         enablerepo: "postgresql-{{ postgresql_version }}"
 
     - name: Install postgresql optional packages
-      ansible.builtin.yum:
+      ansible.builtin.dnf:
         name: "{{ postgresql_optional_packages }}"
         state: "{{ postgresql_package_state | default('present') }}"
         enablerepo: "postgresql-{{ postgresql_version }}"
@@ -53,23 +53,66 @@
         name: gnupg
         state: present
 
-    - name: Import APT key from official PostgreSQL repository (Debian)
-      ansible.builtin.apt_key:
+    - name: Download APT signing key
+      ansible.builtin.get_url:
         url: "{{ postgresql_gpg_key }}"
+        dest: /tmp/postgresql.asc
+        mode: "0644"
+      changed_when: false
 
-    - name: Add official PostgreSQL repository (Debian)
-      ansible.builtin.apt_repository:
-        repo: deb {{ postgresql_repo }} {{ ansible_distribution_release }}-pgdg main
-        filename: "pgdg.list"
+    - name: Convert APT key into binary format
+      ansible.builtin.command:
+        cmd: >-
+          gpg
+          --batch
+          --yes
+          --no-tty
+          --dearmor
+          -o /tmp/postgresql.gpg
+          /tmp/postgresql.asc
+      changed_when: false
+
+    - name: Import Microsoft GPG key
+      ansible.builtin.apt_key:
         state: present
-      register: _apt_repo
+        file: /tmp/postgresql.gpg
+        keyring: /etc/apt/trusted.gpg.d/postgresql.gpg
+      become: yes
+      when: ansible_distribution_major_version | int < 12
 
-    - name: Update package list (APT)  # noqa no-handler
+    - name: Copy APT signing key into the proper drop-in directory
+      ansible.builtin.copy:
+        src: /tmp/postgresql.gpg
+        dest: /etc/apt/trusted.gpg.d/postgresql.gpg
+        remote_src: yes
+        mode: "0644"
+      when: ansible_distribution_major_version | int >= 12
+
+    - name: Setup Microsoft APT repository  # noqa jinja[spacing]
+      ansible.builtin.apt_repository:
+        filename: virtualbox
+        repo: >-
+          {%- if ansible_distribution_major_version | int < 12 -%}
+          deb
+          [arch=amd64,arm64]
+          {{ postgresql_repo }}
+          {{ ansible_distribution_release }}-pgdg
+          main
+          {%- else -%}
+          deb
+          [arch=amd64,arm64 signed-by=/etc/apt/trusted.gpg.d/postgresql.gpg]
+          {{ postgresql_repo }}
+          {{ ansible_distribution_release }}-pgdg
+          main
+          {%- endif -%}
+        state: present
+      become: yes
+      register: __apt_repository
+
+    - name: Update package list  # noqa no-handler
       ansible.builtin.apt:
-        force_apt_get: yes
         update_cache: yes
-        cache_valid_time: 0
-      when: _apt_repo.changed
+      when: __apt_repository.changed
 
     - name: Install postgresql required OS packages
       ansible.builtin.apt:
@@ -82,9 +125,9 @@
         state: "{{ postgresql_package_state | default('present') }}"
       when: postgresql_install_optional_packages | bool
 
-- name: Install postgresql pypi packages
-  ansible.builtin.pip:
-    name: "{{ postgresql_pip_packages }}"
-    state: present
-  environment:
-    PATH: "{{ ansible_env.PATH }}:{{ postgresql_bin_dir }}"
+- name: Install pykickstart into a virtualenv
+  ansible.builtin.include_tasks:
+    file: venv.yml
+  vars:
+    venv_root: "{{ postgresql_venv_root }}"
+    venv_packages: "{{ postgresql_pip_packages }}"

@@ -3,7 +3,7 @@
 dependency:
   name: galaxy
 driver:
-  name: hetznercloud
+  name: molecule_hetznercloud
 lint: |
   set -e
   yamllint .
@@ -13,19 +13,19 @@ lint: |
 platforms:
 {% for platform in MOLECULE_DISTROS %}
   - name: postgresql-{{ platform.name }}-pg13
-    server_type: "{{ platform.server_type | default('cx11') }}"
+    server_type: "{{ platform.server_type | default('cx22') }}"
     image: "{{ platform.image }}"
     location: "{{ platform.location | default('hel1') }}"
   - name: postgresql-{{ platform.name }}-pg14
-    server_type: "{{ platform.server_type | default('cx11') }}"
+    server_type: "{{ platform.server_type | default('cx22') }}"
     image: "{{ platform.image }}"
     location: "{{ platform.location | default('hel1') }}"
   - name: postgresql-{{ platform.name }}-pg15
-    server_type: "{{ platform.server_type | default('cx11') }}"
+    server_type: "{{ platform.server_type | default('cx22') }}"
     image: "{{ platform.image }}"
     location: "{{ platform.location | default('hel1') }}"
   - name: postgresql-{{ platform.name }}-pg16
-    server_type: "{{ platform.server_type | default('cx11') }}"
+    server_type: "{{ platform.server_type | default('cx22') }}"
     image: "{{ platform.image }}"
     location: "{{ platform.location | default('hel1') }}"
 {% endfor %}

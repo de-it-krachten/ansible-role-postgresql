@@ -13,6 +13,8 @@
     state: present
   become: yes
   become_user: "{{ postgresql_user }}"
+  vars:
+    ansible_python_interpreter: "{{ postgresql_venv_root }}/bin/python3"
 
 - name: Create database user '{{ postgresql_db_user }}'
   community.postgresql.postgresql_user:
@@ -22,3 +24,5 @@
     db: "{{ postgresql_db_name }}"
   become: yes
   become_user: "{{ postgresql_user }}"
+  vars:
+    ansible_python_interpreter: "{{ postgresql_venv_root }}/bin/python3"
