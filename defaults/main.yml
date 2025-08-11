@@ -15,6 +15,9 @@ postgresql_version: 13
 # List of server packages
 postgresql_optional_packages: []
 
+# Location for pypi virtualenv
+postgresql_venv_root: /usr/local/venv/postgresql
+
 # Should optional packages (devel) be installed
 postgresql_install_optional_packages: false
 

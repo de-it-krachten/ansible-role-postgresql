@@ -22,15 +22,19 @@ Supported platforms
 
 - Red Hat Enterprise Linux 8<sup>1</sup>
 - Red Hat Enterprise Linux 9<sup>1</sup>
+- Red Hat Enterprise Linux 10<sup>1</sup>
 - RockyLinux 8
 - RockyLinux 9
+- RockyLinux 10
 - OracleLinux 8
 - OracleLinux 9
+- OracleLinux 10
 - AlmaLinux 8
 - AlmaLinux 9
+- AlmaLinux 10
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
-- Ubuntu 20.04 LTS
+- Debian 13 (Trixie)
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
 
@@ -54,6 +58,9 @@ postgresql_version: 13
 
 # List of server packages
 postgresql_optional_packages: []
+
+# Location for pypi virtualenv
+postgresql_venv_root: /usr/local/venv/postgresql
 
 # Should optional packages (devel) be installed
 postgresql_install_optional_packages: false
