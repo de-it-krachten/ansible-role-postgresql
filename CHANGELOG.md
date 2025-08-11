@@ -1,3 +1,14 @@
+# [1.5.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.4.0...v1.5.0) (2025-08-11)
+
+
+### Features
+
+* Add support for AlmaLinux 10 ([f0a0196](https://github.com/de-it-krachten/ansible-role-postgresql/commit/f0a01966cfdef4cf261ba452405f2a30e41b55d9))
+* Add support for Debian 13 (Trixie) ([c35bc8f](https://github.com/de-it-krachten/ansible-role-postgresql/commit/c35bc8f9289d53a43e77cb7e94715140c755c38e))
+* Add support for OracleLinux 10 ([5163763](https://github.com/de-it-krachten/ansible-role-postgresql/commit/5163763249031c79f2f630719a62ad3d2999669c))
+* Add support for Red Hat Enterprise Linux 10 ([f0b9879](https://github.com/de-it-krachten/ansible-role-postgresql/commit/f0b9879b502f735294dc3e9abf3cd61760898452))
+* Add support for RockyLinux 10 ([1bfe11e](https://github.com/de-it-krachten/ansible-role-postgresql/commit/1bfe11e35c200e42773da6d5c470ffa294a83799))
+
 # [1.4.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.3.0...v1.4.0) (2024-12-29)
 
 
