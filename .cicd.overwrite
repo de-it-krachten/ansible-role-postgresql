@@ -11,24 +11,12 @@ generic:
 
 # Supported platforms
 platforms:
-  rhel7:
-    ci: false
-    supported: false
-  centos7:
-    ci: false
-    supported: false
-  opensuse15:
-    ci: false
-    supported: false
-  sles15:
-    ci: false
-    supported: false
-  fedora41:
-    ci: false
-    supported: false
   fedora42:
-    ci: false
     supported: false
+    ci: false
+  fedora43:
+    supported: false
+    ci: false
 
 # CI templates
 ci_templates:

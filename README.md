@@ -41,6 +41,7 @@ Supported platforms
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
 
+
 ## Role Variables
 ### defaults/main.yml
 <pre><code>
