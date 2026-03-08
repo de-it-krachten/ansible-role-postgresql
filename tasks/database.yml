@@ -21,7 +21,7 @@
     name: "{{ postgresql_db_user }}"
     state: present
     password: "{{ postgresql_db_password }}"
-    db: "{{ postgresql_db_name }}"
+    login_db: "{{ postgresql_db_name }}"
   become: yes
   become_user: "{{ postgresql_user }}"
   vars:
@@ -29,7 +29,7 @@
 
 - name: Grant all privileges user '{{ postgresql_db_user }}' on db '{{ postgresql_db_name }}'  # noqa name[template]
   community.postgresql.postgresql_privs:
-    database: "{{ postgresql_db_name }}"
+    login_db: "{{ postgresql_db_name }}"
     privs: ALL
     type: database
     objs: "{{ postgresql_db_user }}"
@@ -42,7 +42,7 @@
 
 - name: Grant usage and create on public schema
   community.postgresql.postgresql_privs:
-    database: "{{ postgresql_db_name }}"
+    login_db: "{{ postgresql_db_name }}"
     type: schema
     objs: public
     privs: USAGE,CREATE
