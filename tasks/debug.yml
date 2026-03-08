@@ -9,3 +9,4 @@
       postgresql_bin_dir: "{{ postgresql_bin_dir }}"
       postgresql_data_dir: "{{ postgresql_data_dir if postgresql_install_type == 'server' else 'N/A' }}"
       postgresql_etc_dir: "{{ postgresql_etc_dir }}"
+      postgresql_service: "{{ postgresql_service }}"
