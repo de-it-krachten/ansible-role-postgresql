@@ -26,3 +26,29 @@
   become_user: "{{ postgresql_user }}"
   vars:
     ansible_python_interpreter: "{{ postgresql_venv_root }}/bin/python3"
+
+- name: Grant all privileges user '{{ postgresql_db_user }}' on db '{{ postgresql_db_name }}'  # noqa name[template]
+  community.postgresql.postgresql_privs:
+    database: "{{ postgresql_db_name }}"
+    privs: ALL
+    type: database
+    objs: "{{ postgresql_db_user }}"
+    roles: "{{ postgresql_db_user }}"
+  become: yes
+  become_user: "{{ postgresql_user }}"
+  vars:
+    ansible_python_interpreter: "{{ postgresql_venv_root }}/bin/python3"
+  when: postgresql_db_user_full_access | bool
+
+- name: Grant usage and create on public schema
+  community.postgresql.postgresql_privs:
+    database: "{{ postgresql_db_name }}"
+    type: schema
+    objs: public
+    privs: USAGE,CREATE
+    roles: "{{ postgresql_db_user }}"
+  become: yes
+  become_user: "{{ postgresql_user }}"
+  vars:
+    ansible_python_interpreter: "{{ postgresql_venv_root }}/bin/python3"
+  when: postgresql_db_user_full_access | bool

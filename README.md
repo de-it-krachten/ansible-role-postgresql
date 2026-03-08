@@ -87,6 +87,9 @@ postgresql_encryption_scheme: scram-sha-256
 postgresql_user: postgres
 postgresql_group: postgres
 
+# Should database user have full access
+postgresql_db_user_full_access: false
+
 # Dict of postgrewsql settings
 postgresql_settings:
   listen_addresses: "127.0.0.1"
