@@ -1,10 +1,21 @@
 ---
 
+- name: Show venv settings
+  ansible.builtin.debug:
+    msg:
+      venv_root: "{{ venv_root }}"
+      venv_base_packages: "{{ venv_base_packages }}"
+  vars:
+    venv_base_packages:
+      - pip
+      - wheel
+      - setuptools
+
 - name: Create virtualenv
   ansible.builtin.pip:
     name: "{{ venv_base_packages }}"
     virtualenv: "{{ venv_root }}"
-    virtualenv_command: "python3 -m venv"
+    virtualenv_command: "/usr/bin/python3 -m venv"
     extra_args: --upgrade
   vars:
     venv_base_packages:

@@ -7,22 +7,44 @@
       postgresql_db_user: "{{ postgresql_db_user }}"
       postgresql_db_password: "{{ postgresql_db_password }}"
 
-- name: Create database '{{ postgresql_db_name }}'
-  community.postgresql.postgresql_db:
-    name: "{{ postgresql_db_name }}"
-    state: present
+- name: Setup database
   become: yes
   become_user: "{{ postgresql_user }}"
   vars:
-    ansible_python_interpreter: "{{ postgresql_venv_root }}/bin/python3"
+    ansible_python_interpreter: >-
+      {%- if postgresql_venv_use | bool -%}
+      {{ postgresql_venv_root }}/bin/python3
+      {%- else -%}
+      /usr/bin/python3
+      {%- endif %}
+  block:
 
-- name: Create database user '{{ postgresql_db_user }}'
-  community.postgresql.postgresql_user:
-    name: "{{ postgresql_db_user }}"
-    state: present
-    password: "{{ postgresql_db_password }}"
-    db: "{{ postgresql_db_name }}"
-  become: yes
-  become_user: "{{ postgresql_user }}"
-  vars:
-    ansible_python_interpreter: "{{ postgresql_venv_root }}/bin/python3"
+    - name: Create database '{{ postgresql_db_name }}'
+      community.postgresql.postgresql_db:
+        name: "{{ postgresql_db_name }}"
+        state: present
+
+    - name: Create database user '{{ postgresql_db_user }}'
+      community.postgresql.postgresql_user:
+        name: "{{ postgresql_db_user }}"
+        state: present
+        password: "{{ postgresql_db_password }}"
+        login_db: "{{ postgresql_db_name }}"
+
+    - name: Grant all privileges user '{{ postgresql_db_user }}' on db '{{ postgresql_db_name }}'  # noqa name[template]
+      community.postgresql.postgresql_privs:
+        login_db: "{{ postgresql_db_name }}"
+        privs: ALL
+        type: database
+        objs: "{{ postgresql_db_user }}"
+        roles: "{{ postgresql_db_user }}"
+      when: postgresql_db_user_full_access | bool
+
+    - name: Grant usage and create on public schema
+      community.postgresql.postgresql_privs:
+        login_db: "{{ postgresql_db_name }}"
+        type: schema
+        objs: public
+        privs: USAGE,CREATE
+        roles: "{{ postgresql_db_user }}"
+      when: postgresql_db_user_full_access | bool

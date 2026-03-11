@@ -10,13 +10,12 @@ postgresql_gpg_key: >-
 # List of required packages
 postgresql_server_packages:
   - postgresql{{ postgresql_version }}-server
+  - python3-psycopg2
 postgresql_client_packages:
   - postgresql{{ postgresql_version }}
+  - python3-psycopg2
 postgresql_optional_packages:
   - postgresql{{ postgresql_version }}-devel
-
-# Install optional packages
-postgresql_install_optional_packages: true
 
 # Binary/data/etc directory location
 postgresql_bin_dir: /usr/pgsql-{{ postgresql_version }}/bin

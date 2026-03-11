@@ -29,7 +29,10 @@
     name: "{{ postgresql_packages }}"
     state: present
 
-- name: Install postgresql pypi packages
-  ansible.builtin.pip:
-    name: "{{ postgresql_pip_packages }}"
-    state: present
+- name: Install psycopg2 into a virtualenv
+  ansible.builtin.include_tasks:
+    file: venv.yml
+  vars:
+    venv_root: "{{ postgresql_venv_root }}"
+    venv_packages: "{{ postgresql_venv_packages }}"
+  when: postgresql_venv_use | bool
