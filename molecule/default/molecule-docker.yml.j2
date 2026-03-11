@@ -34,6 +34,12 @@ platforms:
 {% for platform in MOLECULE_DISTROS %}
   - name: postgresql-{{ platform.name }}-pg14
     image: "{{ platform.image }}"
+{% if platform.cap_add is defined %}
+    cap_add:
+{% for cap in platform.cap_add %}
+      - {{ cap }}
+{% endfor %}
+{% endif %}
 {% if platform.kernel_memory is defined %}
     kernel_memory: {{ platform.kernel_memory }}
 {% endif %}
@@ -72,6 +78,12 @@ platforms:
     dockerfile: Dockerfile.{{ platform.name }}.j2
   - name: postgresql-{{ platform.name }}-pg15
     image: "{{ platform.image }}"
+{% if platform.cap_add is defined %}
+    cap_add:
+{% for cap in platform.cap_add %}
+      - {{ cap }}
+{% endfor %}
+{% endif %}
 {% if platform.kernel_memory is defined %}
     kernel_memory: {{ platform.kernel_memory }}
 {% endif %}
@@ -110,6 +122,12 @@ platforms:
     dockerfile: Dockerfile.{{ platform.name }}.j2
   - name: postgresql-{{ platform.name }}-pg16
     image: "{{ platform.image }}"
+{% if platform.cap_add is defined %}
+    cap_add:
+{% for cap in platform.cap_add %}
+      - {{ cap }}
+{% endfor %}
+{% endif %}
 {% if platform.kernel_memory is defined %}
     kernel_memory: {{ platform.kernel_memory }}
 {% endif %}
@@ -148,6 +166,12 @@ platforms:
     dockerfile: Dockerfile.{{ platform.name }}.j2
   - name: postgresql-{{ platform.name }}-pg17
     image: "{{ platform.image }}"
+{% if platform.cap_add is defined %}
+    cap_add:
+{% for cap in platform.cap_add %}
+      - {{ cap }}
+{% endfor %}
+{% endif %}
 {% if platform.kernel_memory is defined %}
     kernel_memory: {{ platform.kernel_memory }}
 {% endif %}
@@ -186,6 +210,12 @@ platforms:
     dockerfile: Dockerfile.{{ platform.name }}.j2
   - name: postgresql-{{ platform.name }}-pg18
     image: "{{ platform.image }}"
+{% if platform.cap_add is defined %}
+    cap_add:
+{% for cap in platform.cap_add %}
+      - {{ cap }}
+{% endfor %}
+{% endif %}
 {% if platform.kernel_memory is defined %}
     kernel_memory: {{ platform.kernel_memory }}
 {% endif %}

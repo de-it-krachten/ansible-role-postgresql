@@ -7,7 +7,7 @@ postgresql_install_type: server
 postgresql_type: oss
 
 # Postgresql version
-postgresql_version: 13
+postgresql_version: 16
 
 # Defines proxy to use
 # postgresql_proxy: http://127.0.0.1:3128
