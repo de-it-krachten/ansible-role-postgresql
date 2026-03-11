@@ -1,3 +1,16 @@
+# [1.6.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.5.0...v1.6.0) (2026-03-11)
+
+
+### Bug Fixes
+
+* Change default version to '16' ([177c95f](https://github.com/de-it-krachten/ansible-role-postgresql/commit/177c95f4420fb9d0bc5f47a5dbff75f30091f8c2))
+* Make virtualenv for psycopg2 optional ([967a4a5](https://github.com/de-it-krachten/ansible-role-postgresql/commit/967a4a5640c9e600b8733080402e1b548c28fbf1))
+
+
+### Features
+
+* Optional full grant to database ([1d7b55c](https://github.com/de-it-krachten/ansible-role-postgresql/commit/1d7b55cc8e26637324c402d6716e4ad69794e191))
+
 # [1.5.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.4.0...v1.5.0) (2025-08-11)
 
 
