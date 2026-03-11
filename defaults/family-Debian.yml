@@ -9,8 +9,10 @@ postgresql_gpg_key: https://www.postgresql.org/media/keys/ACCC4CF8.asc
 # Lists of packages
 postgresql_server_packages:
   - postgresql-{{ postgresql_version }}
+  - python3-psycopg2
 postgresql_client_packages:
   - postgresql-client-{{ postgresql_version }}
+  - python3-psycopg2
 postgresql_optional_packages:
   - libpq-dev
 

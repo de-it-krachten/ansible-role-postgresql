@@ -60,14 +60,17 @@ postgresql_version: 16
 # List of server packages
 postgresql_optional_packages: []
 
-# Location for pypi virtualenv
-postgresql_venv_root: /usr/local/venv/postgresql
-
 # Should optional packages (devel) be installed
 postgresql_install_optional_packages: false
 
-# List of packages
-postgresql_pip_packages:
+# Use pypi packages in virtualenv
+postgresql_venv_use: false
+
+# Location for pypi virtualenv
+postgresql_venv_root: /usr/local/venv/postgresql
+
+## List of packages
+postgresql_venv_packages:
   - psycopg2-binary
 
 # Password encryption to use
@@ -117,8 +120,10 @@ postgresql_gpg_key: https://www.postgresql.org/media/keys/ACCC4CF8.asc
 # Lists of packages
 postgresql_server_packages:
   - postgresql-{{ postgresql_version }}
+  - python3-psycopg2
 postgresql_client_packages:
   - postgresql-client-{{ postgresql_version }}
+  - python3-psycopg2
 postgresql_optional_packages:
   - libpq-dev
 
@@ -148,13 +153,12 @@ postgresql_gpg_key: >-
 # List of required packages
 postgresql_server_packages:
   - postgresql{{ postgresql_version }}-server
+  - python3-psycopg2
 postgresql_client_packages:
   - postgresql{{ postgresql_version }}
+  - python3-psycopg2
 postgresql_optional_packages:
   - postgresql{{ postgresql_version }}-devel
-
-# Install optional packages
-postgresql_install_optional_packages: true
 
 # Binary/data/etc directory location
 postgresql_bin_dir: /usr/pgsql-{{ postgresql_version }}/bin

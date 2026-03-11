@@ -22,6 +22,8 @@ platforms:
 ci_templates:
   converge.yml:
     force: false
+  ansible-lint:
+    force: false
 
 # Molecule
 molecule:
@@ -36,6 +38,7 @@ molecule:
       postgresql_db_name: test
       postgresql_db_user: test
       postgresql_db_password: test
+      postgresql_db_user_full_access: true
   nodes:
     - name: pg14
     - name: pg15
