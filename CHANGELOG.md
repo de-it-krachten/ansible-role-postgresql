@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.6.0...v1.7.0) (2026-04-08)
+
+
+### Features
+
+* Added support for Ubuntu 26.04 LTS ([a983fb1](https://github.com/de-it-krachten/ansible-role-postgresql/commit/a983fb1f4288c57297cbf9bf14a926754a2a6f4c))
+
 # [1.6.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.5.0...v1.6.0) (2026-03-11)
 
 
