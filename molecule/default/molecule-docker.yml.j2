@@ -46,10 +46,10 @@ platforms:
 {% if platform.memory is defined %}
     memory: {{ platform.memory }}
 {% endif %}
-    rhsm: {{ platform.rhsm | default(False) }}
+    # rhsm: {{ platform.rhsm | default(False) }}
     command: ${MOLECULE_DOCKER_COMMAND:-""}
 {% if platform.environment is defined %}
-    environment:
+    env:
 {% for key, value in platform.environment.items() %}
       {{ key }}: "{{ value }}"
 {% endfor %}
@@ -90,10 +90,10 @@ platforms:
 {% if platform.memory is defined %}
     memory: {{ platform.memory }}
 {% endif %}
-    rhsm: {{ platform.rhsm | default(False) }}
+    # rhsm: {{ platform.rhsm | default(False) }}
     command: ${MOLECULE_DOCKER_COMMAND:-""}
 {% if platform.environment is defined %}
-    environment:
+    env:
 {% for key, value in platform.environment.items() %}
       {{ key }}: "{{ value }}"
 {% endfor %}
@@ -134,10 +134,10 @@ platforms:
 {% if platform.memory is defined %}
     memory: {{ platform.memory }}
 {% endif %}
-    rhsm: {{ platform.rhsm | default(False) }}
+    # rhsm: {{ platform.rhsm | default(False) }}
     command: ${MOLECULE_DOCKER_COMMAND:-""}
 {% if platform.environment is defined %}
-    environment:
+    env:
 {% for key, value in platform.environment.items() %}
       {{ key }}: "{{ value }}"
 {% endfor %}
@@ -178,10 +178,10 @@ platforms:
 {% if platform.memory is defined %}
     memory: {{ platform.memory }}
 {% endif %}
-    rhsm: {{ platform.rhsm | default(False) }}
+    # rhsm: {{ platform.rhsm | default(False) }}
     command: ${MOLECULE_DOCKER_COMMAND:-""}
 {% if platform.environment is defined %}
-    environment:
+    env:
 {% for key, value in platform.environment.items() %}
       {{ key }}: "{{ value }}"
 {% endfor %}
@@ -222,10 +222,10 @@ platforms:
 {% if platform.memory is defined %}
     memory: {{ platform.memory }}
 {% endif %}
-    rhsm: {{ platform.rhsm | default(False) }}
+    # rhsm: {{ platform.rhsm | default(False) }}
     command: ${MOLECULE_DOCKER_COMMAND:-""}
 {% if platform.environment is defined %}
-    environment:
+    env:
 {% for key, value in platform.environment.items() %}
       {{ key }}: "{{ value }}"
 {% endfor %}
