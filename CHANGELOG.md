@@ -1,3 +1,16 @@
+# [1.8.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.7.0...v1.8.0) (2026-08-05)
+
+
+### Bug Fixes
+
+* Fix deprecation warnings ([63d217a](https://github.com/de-it-krachten/ansible-role-postgresql/commit/63d217a80ffd547d6ae11aac0f8b9c095bcb7dce))
+* Standarize vars.yml ([593aa7e](https://github.com/de-it-krachten/ansible-role-postgresql/commit/593aa7e48b603bf9f8d7eb81faa5c14cb5f7e785))
+
+
+### Features
+
+* Add support for ansible-core 2.20+ ([d358e1d](https://github.com/de-it-krachten/ansible-role-postgresql/commit/d358e1d66720c572800d3f0adfcd69fa5d70572f))
+
 # [1.7.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.6.0...v1.7.0) (2026-04-08)
 
 
