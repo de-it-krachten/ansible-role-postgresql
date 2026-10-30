@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.8.0...v1.9.0) (2026-10-30)
+
+
+### Features
+
+* Drop support for Debian 11 (Bullseye) ([24342bf](https://github.com/de-it-krachten/ansible-role-postgresql/commit/24342bfd37a171557f7d778f2629690f3cc8e63e))
+
 # [1.8.0](https://github.com/de-it-krachten/ansible-role-postgresql/compare/v1.7.0...v1.8.0) (2026-08-05)
 
 
